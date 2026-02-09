@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine's Day</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center center fixed;
+      background-size: cover;
+      overflow: hidden;
+      font-family: 'Cursive', sans-serif;
+    }
+
+    .container {
+      text-align: center;
+      color: white;
+      z-index: 2;
+      padding: 0 10px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 5px #000;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 10px;
+      transition: all 0.3s ease;
+    }
+
+    #yesBtn {
+      background-color: #ff4d6d;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: #999;
+      color: white;
+      position: absolute;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #fff;
+      text-shadow: 2px 2px 5px #000;
+      line-height: 1.4em;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 8s infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -8px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 8px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(45deg);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.8em;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 0.9em;
+      }
+      .message {
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Will you be my Valentine?</h1>
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const message = document.getElementById('message');
+
+    // Move "No" button randomly when hovered or tapped
+    function moveNoBtn() {
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+    }
+
+    noBtn.addEventListener('mouseover', moveNoBtn);
+    noBtn.addEventListener('touchstart', moveNoBtn);
+
+    // Show message when "Yes" is clicked
+    yesBtn.addEventListener('click', () => {
+      message.innerHTML = "Thank you, myloves, my forever Valentine. On February 16, let us wander hand in hand through the timeless beauty of Las Casas Filipinas de Acuzar in Quezon City, where every step will echo the poetry of our love.";
+    });
+
+    // Generate floating hearts
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 8000);
+    }
+
+    setInterval(createHeart, 500);
+  </script>
+</body>
+</html>
